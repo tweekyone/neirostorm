@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.iac.hakaton.neirostorm.model.Practice;
 import ru.iac.hakaton.neirostorm.repository.PracticeRepository;
 
-import java.util.Comparator;
 import java.util.List;
 
 @Controller

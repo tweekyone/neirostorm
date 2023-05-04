@@ -20,12 +20,7 @@ public class PracticeController {
 
     @GetMapping("/")
     public String getPractices(@RequestParam(value = "rating", required = false) String rating, Model model) {
-//        List<Practice> practices = practiceRepository.findAll();
-
-        Practice practice1 = getPractice1();
-        Practice practice2 = getPractice2();
-
-        List<Practice> practices = List.of(practice1, practice2);
+        List<Practice> practices = practiceRepository.findAll();
 
         model.addAttribute("practices", practices);
         model.addAttribute("emptyList", practices.isEmpty());

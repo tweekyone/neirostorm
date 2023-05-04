@@ -7,39 +7,44 @@ import lombok.AllArgsConstructor;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "practices")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "practices")
 public class Practice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 255)
     private String title;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String steps;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String example;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String conclusion;
 
-    @ManyToOne
-    @JoinColumn(name = "theme_id")
-    private Theme theme;
+    @Column(nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private Topic topic;
 
-    private String preview;
+    @Column(name = "preview_image", columnDefinition = "TEXT")
+    private String previewImage;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 }

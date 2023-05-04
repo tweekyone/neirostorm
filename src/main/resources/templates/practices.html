@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Практики</title>
+</head>
+<body>
+<h1>Список практик</h1>
+
+<div>
+    <h3>Сортировка по рейтингу:</h3>
+    <a th:href="@{/practices(rating='asc')}">По возрастанию</a> |
+    <a th:href="@{/practices(rating='desc')}">По убыванию</a>
+</div>
+
+<div th:if="${emptyList}">
+    <p>Список практик пуст.</p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Рейтинг</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="practice : ${practices}">
+        <td th:text="${practice.title}"></td>
+        <td th:text="${practice.description}"></td>
+        <td th:text="${practice.rating}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

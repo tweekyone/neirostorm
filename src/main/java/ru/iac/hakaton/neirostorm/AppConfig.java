@@ -14,6 +14,7 @@ public class AppConfig {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
+                .addScript("classpath:init.sql")
                 .build();
     }
 }

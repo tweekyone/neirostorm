@@ -1,31 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
 <head>
-    <meta charset="UTF-8">
-    <title>Практики</title>
+    <title>Список практик</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Список практик</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Список практик!1</h1>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <!-- Для каждой практики создаем блок col-4 -->
+        <div th:each="practice : ${practices}" class="col">
+            <!-- Создаем карточку card -->
 
-<div th:if="${emptyList}">
-    <p>Список практик пуст.</p>
+                <div class="card h-100">
+
+<!--                    <a class="card-link" th:href="@{/practice(id=${practice.id})}"> </a>-->
+<!--                    <a href="#" class="card-link"></a>-->
+                    <!-- Добавляем картинку практики -->
+    <!--                <img class="card-img-top" th:src="@{${practice.previewImage}}" alt="Practice Preview" style="height: 250px;">-->
+                    <img  class="card-img-top" th:src="${practice.previewImage}" style="height: 250px; object-fit: contain;" alt="Preview Image">
+
+                    <!-- Добавляем блок для содержимого карточки -->
+                    <div class="card-body">
+                        <!-- Добавляем заголовок практики -->
+                        <h5 class="card-title" th:text="${practice.title}"></h5>
+                        <!-- Добавляем описание практики -->
+                        <p class="card-text" th:text="${practice.description}"></p>
+                        <!-- Добавляем пометку темы практики в виде badge -->
+<!--                        <span class="badge bg-primary" th:text="${practice.topic}"></span>-->
+<!--                        <div class="mt-auto">-->
+<!--                            <a th:href="@{/practice/{id}(id=${practice.id})}" class="mt-auto card-link ">Перейти к описанию...</a>-->
+                        <a th:href="@{/practice/{id}(id=${practice.id})}" class="stretched-link">Перейти к описанию...</a>
+<!--                        </div>-->
+                    </div>
+                </div>
+
+        </div>
+    </div>
 </div>
-
-<table>
-    <thead>
-    <tr>
-        <th>Название</th>
-        <th>Описание</th>
-        <th>Рейтинг</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="practice : ${practices}">
-        <td th:text="${practice.title}"></td>
-        <td th:text="${practice.description}"></td>
-        <td></td>
-    </tr>
-    </tbody>
-</table>
 </body>
 </html>

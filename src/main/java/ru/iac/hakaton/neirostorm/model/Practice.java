@@ -16,35 +16,35 @@ public class Practice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, columnDefinition = "LONGVARCHAR")
     private String title;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "LONGVARCHAR")
     private String description;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGVARCHAR")
     private String steps;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGVARCHAR")
     private String example;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "LONGVARCHAR")
     private String conclusion;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
     @Enumerated(EnumType.STRING)
     private Topic topic;
 
-    @Column(name = "preview_image", columnDefinition = "TEXT")
+    @Column(name = "preview_image", columnDefinition = "LONGVARCHAR")
     private String previewImage;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }

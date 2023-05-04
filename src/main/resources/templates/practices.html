@@ -7,12 +7,6 @@
 <body>
 <h1>Список практик</h1>
 
-<div>
-    <h3>Сортировка по рейтингу:</h3>
-    <a th:href="@{/practices(rating='asc')}">По возрастанию</a> |
-    <a th:href="@{/practices(rating='desc')}">По убыванию</a>
-</div>
-
 <div th:if="${emptyList}">
     <p>Список практик пуст.</p>
 </div>
@@ -29,7 +23,7 @@
     <tr th:each="practice : ${practices}">
         <td th:text="${practice.title}"></td>
         <td th:text="${practice.description}"></td>
-        <td th:text="${practice.rating}"></td>
+        <td></td>
     </tr>
     </tbody>
 </table>

@@ -11,6 +11,7 @@ import ru.iac.hakaton.neirostorm.model.Topic;
 import ru.iac.hakaton.neirostorm.repository.PracticeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PracticeController {
@@ -28,17 +29,15 @@ public class PracticeController {
         return "practices";
     }
 
-
     @GetMapping("/practice/{id}")
     public String showPractice(@PathVariable("id") Long id, Model model) {
-        Practice practice = getPractice1();
-        if(1 != id) {
-            practice = getPractice2();
-        }
+        Optional<Practice> practiceOpt = practiceRepository.findById(id);
 
-        if (practice == null) {
+        if (!practiceOpt.isPresent()) {
             throw new IllegalArgumentException("Invalid practice id: " + id);
         }
+
+        Practice practice = practiceOpt.get();
 
         model.addAttribute("practice", practice);
 

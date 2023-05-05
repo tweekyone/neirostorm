@@ -27,11 +27,18 @@ public class PracticeController {
     private final VoteRepository voteRepository;
 
     @GetMapping("/")
-    public String getPractices(@RequestParam(value = "rating", required = false) String rating, Model model) {
-        List<Practice> practices = practiceService.getPractices();
+    public String getPractices(@RequestParam(value = "keyword", required = false) String keyword,
+                               @RequestParam(name = "topic", required = false) String topic,
+                               @RequestParam(value = "sort", required = false) String sort,
+                               @RequestParam(value = "rating", required = false) String rating,
+                               Model model) {
+
+        List<Practice> practices = practiceService.searchPractices(keyword, topic, sort);
 
         model.addAttribute("practices", practices);
-        model.addAttribute("emptyList", practices.isEmpty());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedTopic", topic);
+        model.addAttribute("sort", sort);
 
         return "practices";
     }
@@ -39,6 +46,9 @@ public class PracticeController {
     @GetMapping("/practice/{id}")
     public String showPractice(@PathVariable("id") Long id, HttpServletRequest request, Model model) {
         Practice practice = practiceService.getPracticeById(id);
+        practice.setViews(practice.getViews() + 1);
+        practiceService.save(practice);
+
         String ipAddress = request.getRemoteAddr();
 
         AtomicLong likes = new AtomicLong(0L);

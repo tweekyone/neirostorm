@@ -36,7 +36,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build Docker image
-        run: docker build -t cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-up:latest .
+        run: docker build -t cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-app:latest .
 
       - name: Push Docker image to Yandex Container Registry
-        run: docker push cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-up
+        run: docker push cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-app

@@ -26,14 +26,14 @@
     <div class="container">
         <div class="row my-4">
             <div class="col">
-                <form id="search-form" th:action="@{/practices}" method="get">
+                <form id="search-form" th:action="@{/}" method="get">
                     <div class="row">
                         <div class="col-md-4 col-12 mb-2">
                             <input class="form-control" type="search" name="keyword" th:value="${keyword}"
                                    placeholder="Поиск практик" aria-label="Поиск">
                         </div>
                         <div class="col-md-3 col-12 mb-2">
-                            <select id="search-select" class="form-select" name="topic" th:value="${selectedTopic}">
+                            <select id="search-select" class="form-select" name="topic" th:value="${selectedTopic}" onchange="this.form.submit()">
                                 <option value="" th:selected="${selectedTopic == null}">Все темы</option>
                                 <option value="Разработка" th:selected="${selectedTopic == 'Разработка'}">Разработка
                                 </option>

@@ -63,6 +63,7 @@
                 <h5>Обновлена: <span th:text="${practice.updatedAt != null} ? ${#temporals.format(practice.updatedAt, 'dd.MM.yyyy HH:mm')} : ''"></span></h5>
                 <a th:href="@{/practice/{id}/change(id=${practice.id})}">Редактировать</a>
             </div>
+            <a th:href="@{/practice/{id}/change(id=${practice.id})}" class="btn btn-primary d-flex align-items-center justify-content-center">Редактировать практику</a>
         </div>
     </div>
 </div>

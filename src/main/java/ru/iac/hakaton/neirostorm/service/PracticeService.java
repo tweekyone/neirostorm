@@ -22,8 +22,8 @@ public class PracticeService {
         return practiceRepository.findAll();
     }
 
-    public void save(Practice practice){
-        practiceRepository.save(practice);
+    public Practice save(Practice practice){
+        return practiceRepository.save(practice);
     }
 
     public Optional<Practice> findById(Long id){
@@ -55,7 +55,6 @@ public class PracticeService {
                 .build();
 
         return practiceRepository.save(practice);
-
     }
 
     public List<Practice> searchPractices(String keyword, String topic, String sort) {
@@ -71,6 +70,19 @@ public class PracticeService {
         Specification<Practice> spec = Specification
                 .where(PracticeSpecifications.title(keyword))
                 .and(PracticeSpecifications.topicIs(topic));
-        return practiceRepository.findAll(spec, sortOrder);
+        return practiceRepository.findAll(spec);
+    }
+
+    public Practice updatePractice(long id, PracticeDto practiceDto) {
+        Practice practice = getPracticeById(id);
+        practice.setOwnerName(practiceDto.getOwnerName());
+        practice.setTitle(practiceDto.getTitle());
+        practice.setDescription(practiceDto.getDescription());
+        practice.setSteps(practiceDto.getSteps());
+        practice.setExample(practiceDto.getExample());
+        practice.setConclusion(practiceDto.getConclusion());
+        practice.setPreviewImage(practiceDto.getPreviewImage() == "" ? null : practiceDto.getPreviewImage());
+        practice.setUpdatedAt(LocalDateTime.now());
+        return save(practice);
     }
 }

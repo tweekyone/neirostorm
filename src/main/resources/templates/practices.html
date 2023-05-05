@@ -6,6 +6,11 @@
     <title>Нейроштурм - Лучшие практики ИИ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <style>
+        .card:hover .card-title {
+            color: #0d6efd;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="menu-template :: #menu"></div>
@@ -21,9 +26,9 @@
     <div class="container">
         <div class="row my-4">
             <div class="col">
-                <form th:action="@{/practices}" method="get" class="d-flex">
+                <form id="search-form" th:action="@{/practices}" method="get" class="d-flex">
                     <input class="form-control me-2" type="search" name="keyword" th:value="${keyword}" placeholder="Поиск практик" aria-label="Поиск">
-                    <select class="form-select me-2" name="topic" th:value="${selectedTopic}">
+                    <select id="search-select" class="form-select me-2" name="topic" th:value="${selectedTopic}">
                         <option value="" th:selected="${selectedTopic == null}">Все темы</option>
                         <option value="Разработка" th:selected="${selectedTopic == 'Разработка'}">Разработка</option>
                         <option value="Анализ" th:selected="${selectedTopic == 'Анализ'}">Анализ</option>
@@ -33,6 +38,11 @@
                     </select>
                     <button class="btn btn-outline-success" type="submit">Поиск</button>
                 </form>
+                <script>
+                    document.getElementById("search-select").addEventListener("change", function() {
+                        document.getElementById("search-form").submit();
+                    });
+                </script>
             </div>
         </div>
         <div th:if="${#lists.isEmpty(practices)}" class="alert alert-warning">
@@ -62,10 +72,9 @@
                             <!-- Добавляем описание практики -->
                             <p class="card-text" th:text="${practice.description}"></p>
 
-                            <span class="badge rounded-pill bg-primary mt-auto" th:text="${practice.topic}"></span>
+                            <span class="badge rounded-pill bg-primary mt-auto" th:text="${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName}"></span>
 
-                            <a th:href="@{/practice/{id}(id=${practice.id})}" class="stretched-link">Перейти к
-                                описанию...</a>
+                            <a th:href="@{/practice/{id}(id=${practice.id})}" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>

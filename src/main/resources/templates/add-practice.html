@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>Add Practice</h2>
-<form th:action="@{/insert}" th:object="${practice != null ? price : new ru.iac.hakaton.neirostorm.dto.PriceDto()}" method="post">
+<form th:action="@{/insert}" th:object="${practice}" method="post">
     <div>
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" th:field="*{title}"/>

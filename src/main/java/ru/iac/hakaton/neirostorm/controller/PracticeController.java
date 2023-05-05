@@ -42,7 +42,9 @@ public class PracticeController {
     }
 
     @GetMapping("/add-practice")
-    public String addPractice() {
+    public String addPractice(Model model) {
+        Practice practice = new Practice();
+        model.addAttribute("practice", practice);
         return "add-practice";
     }
 

@@ -61,6 +61,9 @@ public class PracticeService {
         Sort sortOrder;
         if (sort != null && !sort.isEmpty()) {
             sortOrder = Sort.by(sort).ascending();
+            if(sort.equals("views")) {
+                sortOrder = Sort.by(sort).descending();
+            }
         } else {
             sortOrder = Sort.unsorted();
         }

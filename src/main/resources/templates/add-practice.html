@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
 <head>
     <meta charset="UTF-8"/>
     <title>Add Practice</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h2>Add Practice</h2>
@@ -36,7 +39,7 @@
         <label for="topic">Topic:</label>
         <select id="topic" name="topic" th:field="*{topic}">
             <option value="">-- Select Topic --</option>
-            <option th:each="topic : ${topics}" th:value="${topic}" th:text="${topic}"></option>
+            <option th:each="topic : ${topics}" th:value="${topic}" th:text="${topic.displayName}"></option>
         </select>
     </div>
     <div>

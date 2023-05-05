@@ -10,8 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.iac.hakaton.neirostorm.dto.PracticeDto;
 import ru.iac.hakaton.neirostorm.model.Practice;
-import ru.iac.hakaton.neirostorm.service.PracticeService;
-import ru.iac.hakaton.neirostorm.repository.PracticeRepository;
+import ru.iac.hakaton.neirostorm.model.Topic;
 import ru.iac.hakaton.neirostorm.service.PracticeService;
 
 import javax.validation.Valid;
@@ -23,7 +22,6 @@ public class PracticeController {
 
     @Autowired
     private PracticeService practiceService;
-
 
 
     @GetMapping("/")
@@ -49,6 +47,7 @@ public class PracticeController {
     public String addPractice(Model model) {
         Practice practice = new Practice();
         model.addAttribute("practice", practice);
+        model.addAttribute("topics", Topic.values());
         return "add-practice";
     }
 

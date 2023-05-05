@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.iac.hakaton.neirostorm.model.Practice;
-import ru.iac.hakaton.neirostorm.model.Topic;
 import ru.iac.hakaton.neirostorm.repository.PracticeRepository;
+import ru.iac.hakaton.neirostorm.service.PracticeService;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +18,10 @@ public class PracticeController {
 
     @Autowired
     private PracticeRepository practiceRepository;
+
+    @Autowired
+    private PracticeService practiceService;
+
 
     @GetMapping("/")
     public String getPractices(@RequestParam(value = "rating", required = false) String rating, Model model) {
@@ -33,7 +37,7 @@ public class PracticeController {
     public String showPractice(@PathVariable("id") Long id, Model model) {
         Optional<Practice> practiceOpt = practiceRepository.findById(id);
 
-        if (!practiceOpt.isPresent()) {
+        if (practiceOpt.isEmpty()) {
             throw new IllegalArgumentException("Invalid practice id: " + id);
         }
 
@@ -42,5 +46,17 @@ public class PracticeController {
         model.addAttribute("practice", practice);
 
         return "practice";
+    }
+
+    @GetMapping("/practices")
+    public String searchPractices(@RequestParam(value = "keyword", required = false) String keyword,
+                                  @RequestParam(name = "topic", required = false) String topic, Model model) {
+
+        List<Practice> practices = practiceService.searchPractices(keyword, topic);
+
+        model.addAttribute("practices", practices);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedTopic", topic);
+        return "practices";
     }
 }

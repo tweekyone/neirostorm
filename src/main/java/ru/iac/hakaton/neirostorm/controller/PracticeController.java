@@ -53,12 +53,7 @@ public class PracticeController {
     }
 
     @PostMapping("/insert")
-    public String addPractice(@ModelAttribute("practice") @Valid PracticeDto practiceDto,
-                              BindingResult bindingResult,
-                              Model model) {
-        if (bindingResult.hasErrors()) {
-            return "add-practice";
-        }
+    public String addPractice(@ModelAttribute("practice") @Valid PracticeDto practiceDto, Model model) {
         Practice practice = practiceService.addPractice(practiceDto);
 
         model.addAttribute("practice", practice);

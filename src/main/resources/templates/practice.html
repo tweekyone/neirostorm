@@ -2,6 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <title>Practice Details</title>
+  <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css}" />
+</head>
+<body>
+
+<div th:replace="menu-template :: #menu"></div>
+
+<div class="container mt-5">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+<!--      <li class="breadcrumb-item"><a href="/" th:href="@{/?topic=${practice.topic}}" th:text="${practice.topic != null} ? ${practice.topic} : ''">Все практики</a></li>-->
+      <li class="breadcrumb-item"><a href="/" th:href="@{/}">Все практики</a></li>
+      <li class="breadcrumb-item"><a th:href="@{/?topic={param}(param=${practice.topic})}" th:text="${practice.topic != null} ? ${practice.topic} : ''">Все практики</a></li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-md-8">
+      <h1 th:text="${practice.title}"></h1>
+      <p class="lead" th:text="${practice.description}"></p>
+      <div th:if="${practice.steps}">
+        <h2>Шаги достижения результата</h2>
+        <p th:utext="${practice.steps}"></p>
+      </div>
+      <div th:if="${practice.example}">
+        <h2>Пример</h2>
+        <p th:utext="${practice.example}"></p>
+      </div>
+      <div th:if="${practice.conclusion}">
+        <h2>Выводы</h2>
+        <p th:utext="${practice.conclusion}"></p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <a th:href="${practice.previewImage}">
+        <img th:src="${practice.previewImage}" class="img-fluid rounded" alt="Practice preview image" />
+      </a>
+      <div class="mt-3">
+        <h3 th:text="${practice.topic != null} ? ${practice.topic} : ''"></h3>
+        <h4>Автор: <span th:text="${practice.user != null && practice.user.name != null} ? ${practice.user.name} : ''"></span></h4>
+        <h5>Создана: <span th:text="${practice.createdAt != null} ? ${practice.createdAt} : ''"></span></h5>
+        <h5>Обновлена: <span th:text="${practice.updatedAt != null} ? ${practice.updatedAt} : ''"></span></h5>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+ <!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
   <title>Practice - [[${practice.title}]]</title>
@@ -17,3 +71,5 @@
   <p>[[${practice.conclusion}]]</p>
 </body>
 </html>
+
+-->

@@ -4,7 +4,7 @@ FROM openjdk:17-jdk
 # Set the working directory in the container
 WORKDIR /app
 
-RUN ls **/*
+RUN ls -l
 
 # Copy the built JAR file to the working directory
 COPY build/libs/*.jar app.jar

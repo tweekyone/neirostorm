@@ -15,6 +15,8 @@ import ru.iac.hakaton.neirostorm.repository.VoteRepository;
 import ru.iac.hakaton.neirostorm.service.PracticeService;
 
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
@@ -125,6 +127,9 @@ public class PracticeController {
     @GetMapping("/practices-rating")
     public String getPracticesRating(@RequestParam(value = "rating", required = false) String rating, Model model) {
         List<Practice> practices = practiceService.getPractices();
+
+        Comparator<Practice> byTotalRating = Comparator.comparingInt(Practice::getTotalRating).reversed();
+        Collections.sort(practices, byTotalRating);
 
         model.addAttribute("practices", practices);
         model.addAttribute("emptyList", practices.isEmpty());

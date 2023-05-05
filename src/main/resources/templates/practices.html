@@ -59,6 +59,8 @@
                                     <option value="" th:selected="${sort == null}">Выберите сортировку</option>
                                     <option value="title" th:selected="${sort == 'title'}">По названию</option>
                                     <option value="createdAt" th:selected="${sort == 'createdAt'}">По дате создания</option>
+                                    <option value="views" th:selected="${sort == 'views'}">По количеству просмотров</option>
+                                    <option value="votes" th:selected="${sort == 'votes'}">По рейтингу</option>
                                 </select>
                             </div>
                         </div>
@@ -72,7 +74,7 @@
     </div>
 
     <div th:if="${error}" class="alert alert-warning">
-        По вашему запросу ничего не нашлось. Однако вы можете ознакомиться со следующими практиками.
+        По вашему запросу ничего не нашлось =( <br> Однако вы можете ознакомиться со следующими практиками.
     </div>
 
     <div  class="row row-cols-1 row-cols-md-3 g-4">
@@ -93,9 +95,14 @@
                     <!-- Добавляем заголовок практики -->
                     <h5 class="card-title" th:text="${practice.title}"></h5>
                     <!-- Добавляем описание практики -->
+
+                    <p class="card-subtitle text-small text-muted mb-2 justify-content-between">
+                        <span>Просмотров: <span class="me-4" th:text="${practice.views}" /></span>
+                        <span class="text-end">Рейтинг: <span class="me-4" th:text="${practice.totalRating}" /></span>
+                    </p>
                     <p class="card-text" th:text="${practice.description}"></p>
 
-                    <span class="badge rounded-pill bg-primary mt-auto"
+                    <span class="badge badge rounded-pill  bg-primary mt-auto"
                           th:if="${practice.topic !=null && !practice.topic.isBlank()}"
                           th:text="${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName}"></span>
 

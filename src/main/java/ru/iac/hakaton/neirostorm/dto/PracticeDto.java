@@ -1,11 +1,13 @@
 package ru.iac.hakaton.neirostorm.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import ru.iac.hakaton.neirostorm.model.Topic;
 
 import javax.validation.constraints.NotNull;
 
 @Data
+@Builder
 public class PracticeDto {
     @NotNull
     private String ownerName;

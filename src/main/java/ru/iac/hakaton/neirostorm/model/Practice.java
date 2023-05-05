@@ -60,10 +60,9 @@ public class Practice {
         if( likes + dislikes == 0) {
             return 0;
         } else {
-            return (int) (100 * likes / (likes + dislikes));
+            return (int) (100 * (likes - dislikes)/ (likes + dislikes) + 100) / 2;
         }
     }
-
 
     @OneToMany(mappedBy = "practice")
     private List<Vote> votes;

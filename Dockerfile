@@ -1,8 +1,16 @@
-FROM adoptopenjdk/openjdk17:alpine-jre
+# Use the official OpenJDK 17 image as the base image
+FROM openjdk:17-jdk
 
-ARG JAR_FILE=build/libs/*.jar
-COPY ${JAR_FILE} app.jar
+# Set the working directory in the container
+WORKDIR /app
 
+RUN ls -l
+
+# Copy the built JAR file to the working directory
+COPY build/libs/*.jar ./
+
+# Expose the default Spring Boot application port
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Set the entrypoint for the final image
+ENTRYPOINT ["java", "-jar", "neirostorm-0.0.1-SNAPSHOT.jar"]

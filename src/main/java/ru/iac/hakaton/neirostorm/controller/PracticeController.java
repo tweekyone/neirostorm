@@ -34,7 +34,14 @@ public class PracticeController {
                                Model model) {
 
         List<Practice> practices = practiceService.searchPractices(keyword, topic, sort);
-
+        if (practices.isEmpty()) {
+            model.addAttribute("error", true);
+            practices = practiceService.getPractices();
+            model.addAttribute("practices", practices);
+        }
+        else {
+            model.addAttribute("error", false);
+        }
         model.addAttribute("practices", practices);
         model.addAttribute("keyword", keyword);
         model.addAttribute("selectedTopic", topic);
@@ -98,7 +105,14 @@ public class PracticeController {
                                   Model model) {
 
         List<Practice> practices = practiceService.searchPractices(keyword, topic, sort);
-
+        if (practices.isEmpty()) {
+            model.addAttribute("error", true);
+            practices = practiceService.getPractices();
+            model.addAttribute("practices", practices);
+        }
+        else {
+            model.addAttribute("error", false);
+        }
         model.addAttribute("practices", practices);
         model.addAttribute("keyword", keyword);
         model.addAttribute("selectedTopic", topic);

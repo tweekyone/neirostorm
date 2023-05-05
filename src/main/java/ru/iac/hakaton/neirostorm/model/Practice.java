@@ -1,5 +1,6 @@
 package ru.iac.hakaton.neirostorm.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -8,8 +9,10 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "practices")
 public class Practice {
     @Id

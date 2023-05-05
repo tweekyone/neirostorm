@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Practice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<h2>Add Practice</h2>
+<form th:action="@{/insert}" th:object="${practice}" method="post">
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" th:field="*{title}"/>
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</p>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" th:field="*{description}"></textarea>
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</p>
+    </div>
+    <div>
+        <label for="steps">Steps:</label>
+        <textarea id="steps" name="steps" th:field="*{steps}"></textarea>
+        <p th:if="${#fields.hasErrors('steps')}" th:errors="*{steps}">Steps Error</p>
+    </div>
+    <div>
+        <label for="example">Example:</label>
+        <textarea id="example" name="example" th:field="*{example}"></textarea>
+        <p th:if="${#fields.hasErrors('example')}" th:errors="*{example}">Example Error</p>
+    </div>
+    <div>
+        <label for="conclusion">Conclusion:</label>
+        <textarea id="conclusion" name="conclusion" th:field="*{conclusion}"></textarea>
+        <p th:if="${#fields.hasErrors('conclusion')}" th:errors="*{conclusion}">Conclusion Error</p>
+    </div>
+    <div>
+        <label for="previewImage">Preview Image:</label>
+        <input type="text" id="previewImage" name="previewImage" th:field="*{previewImage}"/>
+        <p th:if="${#fields.hasErrors('previewImage')}" th:errors="*{previewImage}">Preview Image Error</p>
+    </div>
+    <div>
+        <label for="topic">Topic:</label>
+        <select id="topic" name="topic" th:field="*{topic}">
+            <option value="">-- Select Topic --</option>
+            <option th:each="topic : ${topics}" th:value="${topic}" th:text="${topic}"></option>
+        </select>
+        <p th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}">Topic Error</p>
+    </div>
+    <div>
+        <input type="submit" value="Add Practice"/>
+    </div>
+</form>
+</body>
+</html>

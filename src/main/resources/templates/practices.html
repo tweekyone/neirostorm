@@ -100,9 +100,15 @@
 
                     <p class="card-text" th:text="${practice.description}"></p>
 
-                    <span class="badge rounded-pill border  text-primary tex mt-auto w-50"
-                          th:if="${practice.topic !=null && !practice.topic.isBlank()}"
-                          th:text="${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName}"></span>
+                    <div class="mt-auto" th:with="dn=${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName}">
+
+                        <span th:text="${dn}" th:class="${ 'badge rounded-pill border w-50 ' + (dn == 'Разработка' ? 'text-primary border-primary' : dn == 'Анализ' ? 'text-success border-success' : dn == 'Тестирование' ? 'text-danger border-danger' : dn == 'Документирование' ? 'text-info border-info' : 'text-warning border-warning')}"></span>
+                        <!--
+                        <span class="badge rounded-pill border  text-primary tex  w-50"
+
+                              th:if="${practice.topic !=null && !practice.topic.isBlank()}"
+                              th:text="${dn}"></span>-->
+                    </div>
 
                     <div class="d-flex text-small text-muted mt-2 mb-2 ">
                         <span>Просмотров: <span class="" th:text="${practice.views}" /></span>

@@ -13,23 +13,23 @@
 <div class="container mt-5">
 
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb" th:with="topic=${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName}">
             <!--      <li class="breadcrumb-item"><a href="/" th:href="@{/?topic=${practice.topic}}" th:text="${practice.topic != null} ? ${practice.topic} : ''">Все практики</a></li>-->
             <li class="breadcrumb-item"><a href="/" th:href="@{/}">Все практики</a></li>
-            <li class="breadcrumb-item"><a th:href="@{/?topic={param}(param=${practice.topic})}"
+            <li class="breadcrumb-item"><a th:href="@{/?keyword=&topic={param}&sort=(param=${topic})}"
                                            th:text="${practice.topic != null} ? ${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName} : ''">Все практики</a>
             </li>
         </ol>
     </nav>
     <div class="row">
         <div class="col-md-8">
-            <h1 th:text="${practice.title}"></h1>
+            <h1 class="mb-3" th:text="${practice.title}"></h1>
             <div class="col my-2">
                 <div class="d-flex align-items-center">
                     <button th:class="${vote} == 1 ? 'btn btn-success' : 'btn btn-outline-success'" onclick="vote(1)">Нравится
-                        <h2 th:class="${vote} == 1 ? 'mx-2 vote-h2' : 'mx-2 vote-h2-green'" th:text="${likes}"></h2></button>
+                        <h5 th:class="${vote} == 1 ? 'mx-2 vote-h2' : 'mx-2 vote-h2-green'" th:text="${likes}"></h5></button>
                     <button th:class="${vote} == -1 ? 'btn ms-3 btn-danger' : 'btn ms-3 btn-outline-danger'" onclick="vote(-1)">Не нравится
-                        <h2 th:class="${vote} == -1 ? 'mx-2 vote-h2' : 'mx-2 vote-h2-red'" th:text="${dislikes}"></h2>
+                        <h5 th:class="${vote} == -1 ? 'mx-2 vote-h2' : 'mx-2 vote-h2-red'" th:text="${dislikes}"></h5>
                     </button>
                 </div>
                 <div id="error-message" class="alert alert-warning mt-4" style="display: none; width: 40%">
@@ -55,12 +55,12 @@
                  class="img-fluid rounded" alt="Practice preview image"/>
 
             <div class="mt-3">
-                <h3 th:text="${practice.topic != null && !practice.topic.isBlank()} ? ${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName} : ''"></h3>
-                <h4>Автор: <span
+                <h4 th:text="${practice.topic != null && !practice.topic.isBlank()} ? ${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName} : ''"></h4>
+                <h6>Автор: <span
                         th:text="${practice.getOwnerName != null} ? ${practice.getOwnerName} : ''"></span>
-                </h4>
-                <h5>Создана: <span th:text="${practice.createdAt != null} ? ${#temporals.format(practice.createdAt, 'dd.MM.yyyy HH:mm')} : ''"></span></h5>
-                <h5>Обновлена: <span th:text="${practice.updatedAt != null} ? ${#temporals.format(practice.updatedAt, 'dd.MM.yyyy HH:mm')} : ''"></span></h5>
+                </h6>
+                <h6>Создана: <span th:text="${practice.createdAt != null} ? ${#temporals.format(practice.createdAt, 'dd.MM.yyyy HH:mm')} : ''"></span></h6>
+                <h6>Обновлена: <span th:text="${practice.updatedAt != null} ? ${#temporals.format(practice.updatedAt, 'dd.MM.yyyy HH:mm')} : ''"></span></h6>
                 <a th:href="@{/practice/{id}/change(id=${practice.id})}">Редактировать практику</a>
             </div>
 <!--            <a th:href="@{/practice/{id}/change(id=${practice.id})}" class="btn btn-primary d-flex align-items-center justify-content-center">Редактировать практику</a>-->

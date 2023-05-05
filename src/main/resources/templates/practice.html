@@ -16,7 +16,7 @@
             <!--      <li class="breadcrumb-item"><a href="/" th:href="@{/?topic=${practice.topic}}" th:text="${practice.topic != null} ? ${practice.topic} : ''">Все практики</a></li>-->
             <li class="breadcrumb-item"><a href="/" th:href="@{/}">Все практики</a></li>
             <li class="breadcrumb-item"><a th:href="@{/?topic={param}(param=${practice.topic})}"
-                                           th:text="${practice.topic != null} ? ${practice.topic} : ''">Все практики</a>
+                                           th:text="${practice.topic != null} ? ${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName} : ''">Все практики</a>
             </li>
         </ol>
     </nav>

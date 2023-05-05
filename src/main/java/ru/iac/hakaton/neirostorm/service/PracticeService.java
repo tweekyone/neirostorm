@@ -48,7 +48,7 @@ public class PracticeService {
                 .steps(practiceDto.getSteps())
                 .example(practiceDto.getExample())
                 .conclusion(practiceDto.getConclusion())
-                .previewImage(practiceDto.getPreviewImage())
+                .previewImage(practiceDto.getPreviewImage() == "" ? null : practiceDto.getPreviewImage())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();

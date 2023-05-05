@@ -16,6 +16,7 @@ import ru.iac.hakaton.neirostorm.service.PracticeService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PracticeController {
@@ -79,7 +80,7 @@ public class PracticeController {
 
     @PostMapping("/practices/{id}/vote")
     public String vote(@PathVariable("id") Long id, @RequestParam("vote") int vote, HttpServletRequest request, HttpServletResponse response) {
-        Optional<Practice> practiceOpt = practiceRepository.findById(id);
+        Optional<Practice> practiceOpt = practiceService.findById(id);
 
         if (!practiceOpt.isPresent()) {
             throw new IllegalArgumentException("Invalid practice id: " + id);
@@ -107,7 +108,7 @@ public class PracticeController {
             } else {
                 throw new IllegalArgumentException("Invalid vote value: " + vote);
             }
-            practiceRepository.save(practice);
+            practiceService.save(practice);
         }
 
         // устанавливаем куку

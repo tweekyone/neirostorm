@@ -21,6 +21,14 @@ public class PracticeService {
         return practiceRepository.findAll();
     }
 
+    public void save(Practice practice){
+        practiceRepository.save(practice);
+    }
+
+    public Optional<Practice> findById(Long id){
+        return practiceRepository.findById(id);
+    }
+
     public Practice getPracticeById(long id) {
         Optional<Practice> practiceOpt = practiceRepository.findById(id);
 

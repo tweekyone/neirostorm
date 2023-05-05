@@ -18,19 +18,14 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    private String username;
+    private String name;
 
     @Column(unique = true)
     private String email;
 
-    private String password;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Role> roles;
+    @Column(name = "password_hash")
+    private String passwordHash;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
 }

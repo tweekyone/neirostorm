@@ -125,13 +125,18 @@ public class PracticeController {
 
 
     @GetMapping("/practices-rating")
-    public String getPracticesRating(@RequestParam(value = "rating", required = false) String rating, Model model) {
-        List<Practice> practices = practiceService.getPractices();
+    public String getPracticesRating(@RequestParam(value = "keyword", required = false) String keyword,
+                                    @RequestParam(name = "topic", required = false) String topic,
+                                    @RequestParam(value = "sort", required = false) String sort,
+                                    @RequestParam(value = "rating", required = false) String rating,
+                                    Model model)  {
+        List<Practice> practices = practiceService.searchPractices(keyword, topic, sort);
 
         Comparator<Practice> byTotalRating = Comparator.comparingInt(Practice::getTotalRating).reversed();
         Collections.sort(practices, byTotalRating);
 
         model.addAttribute("practices", practices);
+        model.addAttribute("selectedTopic", topic);
         model.addAttribute("emptyList", practices.isEmpty());
 
         return "practices-rating";

@@ -63,13 +63,17 @@ public class PracticeController {
 
     @GetMapping("/practices")
     public String searchPractices(@RequestParam(value = "keyword", required = false) String keyword,
-                                  @RequestParam(name = "topic", required = false) String topic, Model model) {
+                                  @RequestParam(name = "topic", required = false) String topic,
+                                  @RequestParam(value = "sort", required = false) String sort,
+                                  Model model) {
 
-        List<Practice> practices = practiceService.searchPractices(keyword, topic);
+        List<Practice> practices = practiceService.searchPractices(keyword, topic, sort);
 
         model.addAttribute("practices", practices);
         model.addAttribute("keyword", keyword);
         model.addAttribute("selectedTopic", topic);
+        model.addAttribute("sort", sort);
+
         return "practices";
     }
 

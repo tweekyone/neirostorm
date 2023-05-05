@@ -1,6 +1,7 @@
 package ru.iac.hakaton.neirostorm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.iac.hakaton.neirostorm.dto.PracticeDto;
@@ -57,10 +58,16 @@ public class PracticeService {
 
     }
 
-    public List<Practice> searchPractices(String keyword, String topic) {
+    public List<Practice> searchPractices(String keyword, String topic, String sort) {
+        Sort sortOrder;
+        if (sort != null && !sort.isEmpty()) {
+            sortOrder = Sort.by(sort).ascending();
+        } else {
+            sortOrder = Sort.unsorted();
+        }
         Specification<Practice> spec = Specification
                 .where(PracticeSpecifications.title(keyword))
                 .and(PracticeSpecifications.topicIs(topic));
-        return practiceRepository.findAll(spec);
+        return practiceRepository.findAll(spec, sortOrder);
     }
 }

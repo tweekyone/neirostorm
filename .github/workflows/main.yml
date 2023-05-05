@@ -27,7 +27,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
 
       - name: Build Spring Boot app
-        run: ./gradlew build -x test
+        run: ./gradlew clean build -x test
 
       - name: Login to Yandex Cloud Container Registry
         id: login-cr

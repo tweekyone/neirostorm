@@ -21,8 +21,8 @@ public class PracticeService {
         return practiceRepository.findAll();
     }
 
-    public void save(Practice practice){
-        practiceRepository.save(practice);
+    public Practice save(Practice practice){
+        return practiceRepository.save(practice);
     }
 
     public Optional<Practice> findById(Long id){
@@ -54,8 +54,9 @@ public class PracticeService {
                 .build();
 
         return practiceRepository.save(practice);
-
     }
+
+//    public Practice update(PracticeDto)
 
     public List<Practice> searchPractices(String keyword, String topic) {
         Specification<Practice> spec = Specification

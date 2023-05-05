@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.iac.hakaton.neirostorm.dto.PracticeDto;
 import ru.iac.hakaton.neirostorm.model.Practice;
@@ -63,7 +62,6 @@ public class PracticeController {
         }
 
         model.addAttribute("practice", practice);
-
         return "practice";
     }
 
@@ -80,7 +78,6 @@ public class PracticeController {
         Practice practice = practiceService.addPractice(practiceDto);
 
         model.addAttribute("practice", practice);
-
         return "practice";
     }
 
@@ -132,5 +129,33 @@ public class PracticeController {
         vote.setPractice(practice);
         vote.setIpAddress(remoteAddr);
         return vote;
+    }
+
+    @GetMapping("/practice/{id}/change")
+    public String updatePractice(@PathVariable("id") Long id,
+                                 Model model) {
+        Practice practice = practiceService.getPracticeById(id);
+        PracticeDto practiceDto = PracticeDto.builder()
+                .id(practice.getId())
+                .ownerName(practice.getOwnerName())
+                .title(practice.getTitle())
+                .description(practice.getDescription())
+                .steps(practice.getSteps())
+                .example(practice.getExample())
+                .conclusion(practice.getConclusion())
+                .topic(Topic.valueOf(practice.getTopic()))
+                .build();
+
+        model.addAttribute("practice", practiceDto);
+        return "update-practice";
+    }
+
+    @PutMapping("/practice/{id}/update")
+    public String updatePractice(@PathVariable("id") Long id,
+                                 @ModelAttribute("practice") @Valid PracticeDto practiceDto,
+                                 Model model) {
+//        Practice practice = practiceService.addPractice();
+//        model.addAttribute("practice", practice);
+        return "practice";
     }
 }

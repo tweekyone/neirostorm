@@ -40,9 +40,8 @@ public class Practice {
     @Column(name = "preview_image", columnDefinition = "LONGVARCHAR")
     private String previewImage;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "owner_name", columnDefinition = "LONGVARCHAR")
+    private String ownerName;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

@@ -41,7 +41,8 @@ public class PracticeService {
 
     public Practice addPractice(PracticeDto practiceDto) {
         Practice practice = Practice.builder()
-                .topic(practiceDto.getTopic().getDisplayName())
+                .ownerName(practiceDto.getOwnerName())
+                .topic(practiceDto.getTopic().name())
                 .title(practiceDto.getTitle())
                 .description(practiceDto.getDescription())
                 .steps(practiceDto.getSteps())
@@ -49,6 +50,7 @@ public class PracticeService {
                 .conclusion(practiceDto.getConclusion())
                 .previewImage(practiceDto.getPreviewImage())
                 .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
 
         return practiceRepository.save(practice);

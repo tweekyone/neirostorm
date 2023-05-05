@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class PracticeDto {
     @NotNull
+    private String ownerName;
+    @NotNull
     private String title;
     @NotNull
     private String description;

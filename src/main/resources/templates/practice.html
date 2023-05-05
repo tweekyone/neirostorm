@@ -44,7 +44,7 @@
             <div class="mt-3">
                 <h3 th:text="${practice.topic != null} ? ${practice.topic} : ''"></h3>
                 <h4>Автор: <span
-                        th:text="${practice.user != null && practice.user.name != null} ? ${practice.user.name} : ''"></span>
+                        th:text="${practice.getOwnerName != null} ? ${practice.getOwnerName} : ''"></span>
                 </h4>
                 <h5>Создана: <span th:text="${practice.createdAt != null} ? ${practice.createdAt} : ''"></span></h5>
                 <h5>Обновлена: <span th:text="${practice.updatedAt != null} ? ${practice.updatedAt} : ''"></span></h5>

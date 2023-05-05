@@ -3,7 +3,7 @@ package ru.iac.hakaton.neirostorm.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,11 +20,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@AllArgsConstructor
 public class PracticeController {
 
-    @Autowired
-    private PracticeService practiceService;
-
+    private final PracticeService practiceService;
 
     @GetMapping("/")
     public String getPractices(@RequestParam(value = "rating", required = false) String rating, Model model) {

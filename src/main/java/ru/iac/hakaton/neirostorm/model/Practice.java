@@ -48,4 +48,21 @@ public class Practice {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name = "views", nullable = false)
+    private int views;
+
+/*
+    public float getTotalRating() {
+        if (likes + dislikes == 0) {
+            // обработка случая, когда нет лайков и дизлайков
+            return 0;
+        } else {
+            float rating = (float) (likes * 1 + dislikes * -1) / (likes + dislikes);
+            // обработка случая, когда есть лайки и дизлайки
+            return rating;
+        }
+    }
+
+ */
 }

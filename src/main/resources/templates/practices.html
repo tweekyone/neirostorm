@@ -18,35 +18,52 @@
             </div>
         </div>
     </div>
-    <div class="row mt-2 row-cols-1 row-cols-md-3 g-4">
+    <div class="container">
+        <div class="row my-4">
+            <div class="col">
+                <form th:action="@{/practices}" method="get" class="d-flex">
+                    <input class="form-control me-2" type="search" name="keyword" th:value="${keyword}" placeholder="Поиск практик" aria-label="Поиск">
+                    <select class="form-select me-2" name="topic" th:value="${selectedTopic}">
+                        <option value="" th:selected="${selectedTopic == null}">Все темы</option>
+                        <option value="Разработка" th:selected="${selectedTopic == 'Разработка'}">Разработка</option>
+                        <option value="Анализ" th:selected="${selectedTopic == 'Анализ'}">Анализ</option>
+                        <option value="Тестирование" th:selected="${selectedTopic == 'Тестирование'}">Тестирование</option>
+                        <option value="Документирование" th:selected="${selectedTopic == 'Документирование'}">Документирование</option>
+                        <option value="DevOps" th:selected="${selectedTopic == 'DevOps'}">DevOps</option>
+                    </select>
+                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                </form>
+            </div>
+        </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
         <!-- Для каждой практики создаем блок col-4 -->
         <div th:each="practice : ${practices}" class="col">
             <!-- Создаем карточку card -->
 
                 <div class="card h-100">
 
+<!--                    <a class="card-link" th:href="@{/practice(id=${practice.id})}"> </a>-->
+<!--                    <a href="#" class="card-link"></a>-->
                     <!-- Добавляем картинку практики -->
+    <!--                <img class="card-img-top" th:src="@{${practice.previewImage}}" alt="Practice Preview" style="height: 250px;">-->
                     <img  class="card-img-top" th:src="${practice.previewImage}" style="height: 250px; object-fit: contain;" alt="Preview Image">
 
-                    <!-- Добавляем блок для содержимого карточки -->
-                    <div class="card-body">
-                        <!-- Добавляем заголовок практики -->
-                        <h5 class="card-title" th:text="${practice.title}"></h5>
-                        <!-- Добавляем описание практики -->
-                        <p class="card-text" th:text="${practice.description}"></p>
-                        <!-- Добавляем пометку темы практики в виде badge -->
-                        <span class="badge bg-primary" th:text="${practice.topic}"></span>
-<!--                        <div class="mt-auto">-->
-<!--                            <a th:href="@{/practice/{id}(id=${practice.id})}" class="mt-auto card-link ">Перейти к описанию...</a>-->
-                        <div>
-                            <a th:href="@{/practice/{id}(id=${practice.id})}" class="stretched-link">Перейти к описанию...</a>
+                        <!-- Добавляем блок для содержимого карточки -->
+                        <div class="card-body d-flex flex-column">
+                            <!-- Добавляем заголовок практики -->
+                            <h5 class="card-title" th:text="${practice.title}"></h5>
+                            <!-- Добавляем описание практики -->
+                            <p class="card-text" th:text="${practice.description}"></p>
+
+                            <span class="badge rounded-pill bg-primary mt-auto" th:text="${practice.topic}"></span>
+
+                            <a th:href="@{/practice/{id}(id=${practice.id})}" class="stretched-link">Перейти к
+                                описанию...</a>
                         </div>
-<!--                        </div>-->
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>

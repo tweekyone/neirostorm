@@ -16,4 +16,13 @@ public enum Topic {
     public String getDisplayName() {
         return displayName;
     }
+
+    public static Topic fromDisplayName(String displayName) {
+        for (Topic value : Topic.values()) {
+            if (value.getDisplayName().equals(displayName)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException("No enum value found for displayName: " + displayName);
+    }
 }

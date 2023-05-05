@@ -35,8 +35,7 @@ public class Practice {
     private String conclusion;
 
     @Column(length = 50)
-    @Enumerated(EnumType.STRING)
-    private Topic topic;
+    private String topic;
 
     @Column(name = "preview_image", columnDefinition = "LONGVARCHAR")
     private String previewImage;
@@ -48,6 +47,6 @@ public class Practice {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 }

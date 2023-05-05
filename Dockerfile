@@ -7,7 +7,7 @@ WORKDIR /app
 RUN ls **/*
 
 # Copy the built JAR file to the working directory
-COPY build/libs/*.jar
+COPY build/libs/*.jar app.jar
 
 # Expose the default Spring Boot application port
 EXPOSE 8080

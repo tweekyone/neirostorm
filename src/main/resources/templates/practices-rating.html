@@ -32,7 +32,7 @@
             <tr th:each="practice : ${practices}">
                 <td><img  th:src="${practice.previewImage != null} ? ${practice.previewImage} : '/img/practice-default-logo.png'"
                           style="max-height: 100px; max-width: 100px; object-fit: contain;" alt="Preview Image"></td>
-                <td th:text="${practice.totalRating}"></td>
+                <td th:text="${practice.totalRating + '%'}"></td>
                 <td><a th:href="@{/practice/{id}(id=${practice.id})}">
                     <span th:text="${practice.title}"></span>
                 </a></td>

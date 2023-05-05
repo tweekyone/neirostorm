@@ -56,7 +56,7 @@
             const practiceId = [[${practice.id}]];
             fetch(`/practices/${practiceId}/vote?vote=${vote}`, {method: 'POST'})
                 .then(response => {
-                    if (!response.ok) {
+                    if (response.status === 406) {
                         document.getElementById("error-message").style.display = "block";
                         setTimeout(function () {
                             document.getElementById("error-message").style.display = "none";

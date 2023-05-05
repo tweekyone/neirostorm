@@ -4,6 +4,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,15 +80,8 @@ public class PracticeController {
     }
 
     @PostMapping("/practices/{id}/vote")
-    public String vote(@PathVariable("id") Long id, @RequestParam("vote") int vote, HttpServletRequest request, HttpServletResponse response) {
-        Optional<Practice> practiceOpt = practiceService.findById(id);
-
-        if (!practiceOpt.isPresent()) {
-            throw new IllegalArgumentException("Invalid practice id: " + id);
-        }
-
-        Practice practice = practiceOpt.get();
-
+    public ResponseEntity<String> vote(@PathVariable("id") Long id, @RequestParam("vote") int vote,
+                               HttpServletRequest request, HttpServletResponse response) {
         // проверяем, голосовал ли пользователь за эту практику
         Cookie[] cookies = request.getCookies();
         String votedPracticeIds = null;
@@ -98,7 +93,15 @@ public class PracticeController {
                 }
             }
         }
+
         if (votedPracticeIds == null || !votedPracticeIds.contains(String.valueOf(id))) {
+            Optional<Practice> practiceOpt = practiceService.findById(id);
+
+            if (!practiceOpt.isPresent()) {
+                throw new IllegalArgumentException("Invalid practice id: " + id);
+            }
+
+            Practice practice = practiceOpt.get();
             // увеличиваем/уменьшаем рейтинг в зависимости от голоса
             if (vote == 1) {
                 practice.setLikes(practice.getLikes() + 1);
@@ -108,6 +111,8 @@ public class PracticeController {
                 throw new IllegalArgumentException("Invalid vote value: " + vote);
             }
             practiceService.save(practice);
+        } else {
+            return new ResponseEntity<>("Вы уже проголосовали за эту практику!", HttpStatus.NOT_ACCEPTABLE);
         }
 
         // устанавливаем куку
@@ -117,10 +122,9 @@ public class PracticeController {
             votedPracticeIds += "-" + id;
         }
         Cookie votedPracticeIdsCookie = new Cookie("votedPracticeIds", votedPracticeIds);
-//        votedPracticeIdsCookie.setMaxAge(60 * 60 * 24 * 30 * 2); // срок действия куки - 2 месяца
-        votedPracticeIdsCookie.setMaxAge(10); // срок действия куки - 2 месяца
+        votedPracticeIdsCookie.setMaxAge(60 * 60 * 24 * 30 * 2); // срок действия куки - 2 месяца
         response.addCookie(votedPracticeIdsCookie);
 
-        return "redirect:/practice/" + id;
+        return ResponseEntity.ok("");
     }
 }

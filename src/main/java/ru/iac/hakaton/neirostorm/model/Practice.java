@@ -57,14 +57,7 @@ public class Practice {
         int likes = (int) votes.stream().filter(vote -> vote.getVoteValue() == 1).count();
         int dislikes = (int) votes.stream().filter(vote -> vote.getVoteValue() == -1).count();
 
-        if (likes + dislikes == 0) {
-            // обработка случая, когда нет лайков и дизлайков
-            return 0;
-        } else {
-            float rating = (float) (likes * 1 + dislikes * -1) / (likes + dislikes);
-            // обработка случая, когда есть лайки и дизлайки
-            return rating;
-        }
+       return (likes - dislikes);
     }
 
 

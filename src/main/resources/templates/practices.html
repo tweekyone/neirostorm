@@ -49,8 +49,8 @@
                         </div>
                         <div class="col-md-3 col-12 mb-2">
                             <div class="d-flex align-items-center">
-                                <label for="filter" class="form-label me-2">Сортировать по:</label>
-                                <select id="filter" name="sort" class="form-select" onchange="this.form.submit()">
+                                <label for="filter" class="form-label me-2">Сортировать&nbsp;по:</label>
+                                <select id="filter" name="sort" class="form-select" onchange="this.form.submit()" style="min-width: 250px;">
                                     <option value="" th:selected="${sort == null}">Выберите сортировку</option>
                                     <option value="title" th:selected="${sort == 'title'}">По названию</option>
                                     <option value="createdAt" th:selected="${sort == 'createdAt'}">По дате создания</option>

@@ -29,10 +29,11 @@ jobs:
       - name: Build Spring Boot app
         run: ./gradlew build -x test
 
-      - name: Log in to Yandex Container Registry
-        env:
-          YC_TOKEN: ${{ secrets.YC_TOKEN }}
-        run: echo "$YC_TOKEN" | docker login cr.yandex --username oauth2ac --password-stdin
+      - name: Login to Yandex Cloud Container Registry
+        id: login-cr
+        uses: yc-actions/yc-cr-login@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
       - name: Build Docker image
         run: docker build -t cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-up:latest .

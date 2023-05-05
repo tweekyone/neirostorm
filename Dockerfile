@@ -5,7 +5,7 @@ FROM openjdk:17-jdk
 WORKDIR /app
 
 # Copy the built JAR file to the working directory
-ADD build/libs/*.jar app.jar
+COPY build/libs/*.jar /app/app.jar
 
 # Expose the default Spring Boot application port
 EXPOSE 8080

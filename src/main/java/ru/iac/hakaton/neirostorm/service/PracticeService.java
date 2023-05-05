@@ -3,16 +3,10 @@ package ru.iac.hakaton.neirostorm.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.iac.hakaton.neirostorm.util.PracticeSpecifications;
-import ru.iac.hakaton.neirostorm.model.Practice;
-import ru.iac.hakaton.neirostorm.repository.PracticeRepository;
-
-
-import java.util.List;
-import org.springframework.stereotype.Service;
 import ru.iac.hakaton.neirostorm.dto.PracticeDto;
 import ru.iac.hakaton.neirostorm.model.Practice;
 import ru.iac.hakaton.neirostorm.repository.PracticeRepository;
+import ru.iac.hakaton.neirostorm.util.PracticeSpecifications;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,7 +33,7 @@ public class PracticeService {
 
     public Practice addPractice(PracticeDto practiceDto) {
         Practice practice = Practice.builder()
-                .topic(practiceDto.getTopic())
+                .topic(practiceDto.getTopic().getDisplayName())
                 .title(practiceDto.getTitle())
                 .description(practiceDto.getDescription())
                 .steps(practiceDto.getSteps())
@@ -51,7 +45,7 @@ public class PracticeService {
 
         return practiceRepository.save(practice);
 
-}
+    }
 
     public List<Practice> searchPractices(String keyword, String topic) {
         Specification<Practice> spec = Specification
@@ -59,3 +53,4 @@ public class PracticeService {
                 .and(PracticeSpecifications.topicIs(topic));
         return practiceRepository.findAll(spec);
     }
+}

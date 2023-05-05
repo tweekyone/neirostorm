@@ -10,6 +10,14 @@
 <div th:replace="menu-template :: #menu"></div>
 
 <div class="container mt-5">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+<!--      <li class="breadcrumb-item"><a href="/" th:href="@{/?topic=${practice.topic}}" th:text="${practice.topic != null} ? ${practice.topic} : ''">Все практики</a></li>-->
+      <li class="breadcrumb-item"><a href="/" th:href="@{/}">Все практики</a></li>
+      <li class="breadcrumb-item"><a th:href="@{/?topic={param}(param=${practice.topic})}" th:text="${practice.topic != null} ? ${practice.topic} : ''">Все практики</a></li>
+    </ol>
+  </nav>
   <div class="row">
     <div class="col-md-8">
       <h1 th:text="${practice.title}"></h1>

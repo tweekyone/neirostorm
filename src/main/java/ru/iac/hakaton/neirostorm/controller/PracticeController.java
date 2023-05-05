@@ -40,6 +40,9 @@ public class PracticeController {
     @GetMapping("/practice/{id}")
     public String showPractice(@PathVariable("id") Long id, HttpServletRequest request, Model model) {
         Practice practice = practiceService.getPracticeById(id);
+        practice.setViews(practice.getViews() + 1);
+        practiceService.save(practice);
+
         String ipAddress = request.getRemoteAddr();
 
         AtomicLong likes = new AtomicLong(0L);

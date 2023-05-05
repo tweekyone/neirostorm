@@ -48,10 +48,4 @@ public class Practice {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @Column(name = "likes", nullable = false)
-    private int likes;
-
-    @Column(name = "dislikes", nullable = false)
-    private int dislikes;
 }

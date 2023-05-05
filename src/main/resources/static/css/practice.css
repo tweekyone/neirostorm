@@ -1,0 +1,27 @@
+.btn {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.vote-h2, .vote-h2-green, .vote-h2-red {
+    font-family: fantasy;
+    margin: auto;
+    transition: 0.2s;
+}
+
+.vote-h2-green {
+    color: rgba(0, 128, 0, 0.7);
+}
+
+.vote-h2-red {
+    color: rgba(255, 0, 0, 0.7);
+}
+
+button:hover .vote-h2-green {
+    color: white;
+}
+
+button:hover .vote-h2-red {
+    color: white;
+}
+

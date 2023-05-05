@@ -37,7 +37,6 @@ public class PracticeController {
         if (practices.isEmpty()) {
             model.addAttribute("error", true);
             practices = practiceService.getPractices();
-            model.addAttribute("practices", practices);
         }
         else {
             model.addAttribute("error", false);

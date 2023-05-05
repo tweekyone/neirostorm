@@ -70,7 +70,7 @@ public class PracticeService {
         Specification<Practice> spec = Specification
                 .where(PracticeSpecifications.title(keyword))
                 .and(PracticeSpecifications.topicIs(topic));
-        return practiceRepository.findAll(spec);
+        return practiceRepository.findAll(spec, sortOrder);
     }
 
     public Practice updatePractice(long id, PracticeDto practiceDto) {

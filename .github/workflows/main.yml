@@ -40,3 +40,15 @@ jobs:
 
       - name: Push Docker image to Yandex Container Registry
         run: docker push cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-app
+
+      - name: Deploy to VM
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.YC_VM_IP }}
+          username: yagnyshev
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-app:latest
+            docker stop springboot-container
+            docker rm springboot-container
+            docker run -d --restart=always -p 8080:8080 --name springboot-container cr.yandex/crpbotioe44qqvgoh0jt/my-spring-boot-app:latest

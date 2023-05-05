@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layouts/default">
 <head>
-    <title>Нейроштурм - Лучшие практики ИИ</title>
+    <title>Рейтинг практик</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
     <style>
@@ -32,7 +32,7 @@
             <tr th:each="practice : ${practices}">
                 <td><img  th:src="${practice.previewImage != null} ? ${practice.previewImage} : '/img/practice-default-logo.png'"
                           style="max-height: 100px; max-width: 100px; object-fit: contain;" alt="Preview Image"></td>
-                <td ></td>
+<!--                <td th:text="${practice.totalRating}"></td>-->
                 <td><a th:href="@{/practice/{id}(id=${practice.id})}">
                     <span th:text="${practice.title}"></span>
                 </a></td>

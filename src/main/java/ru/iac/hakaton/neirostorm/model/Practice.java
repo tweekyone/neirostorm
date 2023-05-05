@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -65,4 +66,7 @@ public class Practice {
     }
 
  */
+
+    @OneToMany(mappedBy = "practice")
+    private List<Vote> votes;
 }

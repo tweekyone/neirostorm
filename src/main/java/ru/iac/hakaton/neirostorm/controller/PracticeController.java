@@ -41,6 +41,11 @@ public class PracticeController {
         return "practice";
     }
 
+    @GetMapping("/add-practice")
+    public String addPractice() {
+        return "add-practice";
+    }
+
     @PostMapping("/insert")
     public String addPractice(@ModelAttribute("practice") @Valid PracticeDto practiceDto,
                               BindingResult bindingResult,

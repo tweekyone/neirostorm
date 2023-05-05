@@ -12,8 +12,8 @@
 <div th:replace="menu-template :: #menu"></div>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Описание практики</h2>
-    <form th:action="@{/practice/${practice.id}/update}" th:object="${practice}" method="put">
+    <h2 class="mb-4">Изменение практики</h2>
+    <form th:action="@{/practice/${id}/update}" th:object="${practice}" method="put">
         <div class="mb-3">
             <label for="ownerName" class="form-label">Автор практики:</label>
             <input type="text" class="form-control" id="ownerName" name="ownerName" th:field="*{ownerName}" required>

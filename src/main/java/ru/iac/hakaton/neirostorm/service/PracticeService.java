@@ -1,6 +1,7 @@
 package ru.iac.hakaton.neirostorm.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.iac.hakaton.neirostorm.dto.PracticeDto;
@@ -67,5 +68,18 @@ public class PracticeService {
                 .where(PracticeSpecifications.title(keyword))
                 .and(PracticeSpecifications.topicIs(topic));
         return practiceRepository.findAll(spec);
+    }
+
+    public Practice updatePractice(long id, PracticeDto practiceDto) {
+        Practice practice = getPracticeById(id);
+        practice.setOwnerName(practiceDto.getOwnerName());
+        practice.setTitle(practiceDto.getTitle());
+        practice.setDescription(practiceDto.getDescription());
+        practice.setSteps(practiceDto.getSteps());
+        practice.setExample(practiceDto.getExample());
+        practice.setConclusion(practiceDto.getConclusion());
+        practice.setPreviewImage(practiceDto.getPreviewImage() == "" ? null : practiceDto.getPreviewImage());
+        practice.setUpdatedAt(LocalDateTime.now());
+        return save(practice);
     }
 }

@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 public class PracticeDto {
-    private long id;
     @NotNull
     private String ownerName;
     @NotNull

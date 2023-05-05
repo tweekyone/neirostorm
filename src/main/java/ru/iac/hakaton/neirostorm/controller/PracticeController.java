@@ -164,7 +164,6 @@ public class PracticeController {
                                  Model model) {
         Practice practice = practiceService.getPracticeById(id);
         PracticeDto practiceDto = PracticeDto.builder()
-                .id(practice.getId())
                 .ownerName(practice.getOwnerName())
                 .title(practice.getTitle())
                 .description(practice.getDescription())
@@ -175,6 +174,7 @@ public class PracticeController {
                 .build();
 
         model.addAttribute("practice", practiceDto);
+        model.addAttribute("id", practice.getId());
         return "update-practice";
     }
 
@@ -182,8 +182,8 @@ public class PracticeController {
     public String updatePractice(@PathVariable("id") Long id,
                                  @ModelAttribute("practice") @Valid PracticeDto practiceDto,
                                  Model model) {
-//        Practice practice = practiceService.addPractice();
-//        model.addAttribute("practice", practice);
+        Practice updatedPractice = practiceService.updatePractice(id, practiceDto);
+        model.addAttribute("practice", updatedPractice);
         return "practice";
     }
 }

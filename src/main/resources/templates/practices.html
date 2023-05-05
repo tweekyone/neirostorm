@@ -35,7 +35,11 @@
                 </form>
             </div>
         </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div th:if="${#lists.isEmpty(practices)}" class="alert alert-warning">
+            По вашему запросу ничего не нашлось.
+        </div>
+
+        <div th:unless="${#lists.isEmpty(practices)}" class="row row-cols-1 row-cols-md-3 g-4">
         <!-- Для каждой практики создаем блок col-4 -->
         <div th:each="practice : ${practices}" class="col">
             <!-- Создаем карточку card -->

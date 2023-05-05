@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+<head>
+    <title>Нейроштурм - Лучшие практики ИИ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <style>
+        .card:hover .card-title {
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="menu-template :: #menu"></div>
+<div class="container">
+
+
+        <h1 class="mt-5">Рейтинг практик</h1>
+        <table class="table mt-3">
+            <thead>
+            <tr>
+                <th scope="col">Лого</th>
+                <th scope="col">Рейтинг</th>
+                <th scope="col">Название практики</th>
+                <th scope="col">Автор</th>
+                <th scope="col">Описание практики</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="practice : ${practices}">
+                <td><img  th:src="${practice.previewImage != null} ? ${practice.previewImage} : '/img/practice-default-logo.png'"
+                          style="max-height: 100px; max-width: 150px; object-fit: contain;" alt="Preview Image"></td>
+                <td ></td>
+                <td th:text="${practice.title}"></td>
+                <td th:text="${practice.ownerName}"></td>
+                <td th:text="${practice.description}"></td>
+<!--                <td th:text="${practice.rating}"></td>-->
+            </tr>
+            </tbody>
+        </table>
+</div>
+</body>
+</html>

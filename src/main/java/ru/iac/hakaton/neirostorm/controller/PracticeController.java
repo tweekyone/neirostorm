@@ -73,6 +73,18 @@ public class PracticeController {
         return "practices";
     }
 
+
+    @GetMapping("/practices-rating")
+    public String getPracticesRating(@RequestParam(value = "rating", required = false) String rating, Model model) {
+        List<Practice> practices = practiceService.getPractices();
+
+        model.addAttribute("practices", practices);
+        model.addAttribute("emptyList", practices.isEmpty());
+
+        return "practices-rating";
+    }
+
+
     @PostMapping("/practices/{id}/vote")
     public ResponseEntity<String> vote(@PathVariable("id") Long id, @RequestParam("vote") int vote,
                                        HttpServletRequest request, HttpServletResponse response) {

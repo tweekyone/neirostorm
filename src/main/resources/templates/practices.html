@@ -96,7 +96,10 @@
                     <h5 class="card-title" th:text="${practice.title}"></h5>
                     <!-- Добавляем описание практики -->
 
-                    <p class="card-subtitle text-small text-muted">Просмотров: <span th:text="${practice.views}" /></p>
+                    <p class="card-subtitle text-small text-muted mb-2 justify-content-between">
+                        <span>Просмотров: <span class="me-4" th:text="${practice.views}" /></span>
+                        <span class="text-end">Рейтинг: <span class="me-4" th:text="${practice.totalRating}" /></span>
+                    </p>
                     <p class="card-text" th:text="${practice.description}"></p>
 
                     <span class="badge badge rounded-pill  bg-primary mt-auto"

@@ -1,5 +1,6 @@
 package ru.iac.hakaton.neirostorm.repository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -12,4 +13,5 @@ import java.util.List;
 public interface PracticeRepository extends JpaRepository<Practice, Long>, JpaSpecificationExecutor<Practice> {
     List<Practice> findByOwnerName(String ownerName);
     List<Practice> findAll(Specification<Practice> spec);
+    List<Practice> findAll(Specification<Practice> spec, Sort sort);
 }

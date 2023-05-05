@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -48,4 +49,25 @@ public class Practice {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name = "views", nullable = false)
+    private int views;
+
+    public float getTotalRating() {
+        int likes = (int) votes.stream().filter(vote -> vote.getVoteValue() == 1).count();
+        int dislikes = (int) votes.stream().filter(vote -> vote.getVoteValue() == -1).count();
+
+        if (likes + dislikes == 0) {
+            // обработка случая, когда нет лайков и дизлайков
+            return 0;
+        } else {
+            float rating = (float) (likes * 1 + dislikes * -1) / (likes + dislikes);
+            // обработка случая, когда есть лайки и дизлайки
+            return rating;
+        }
+    }
+
+
+    @OneToMany(mappedBy = "practice")
+    private List<Vote> votes;
 }

@@ -25,4 +25,13 @@ public enum Topic {
         }
         throw new IllegalArgumentException("No enum value found for displayName: " + displayName);
     }
+
+    public static Topic fromName(String name) {
+        for (Topic value : Topic.values()) {
+            if (value.name().equals(name)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException("No enum value found for name: " + name);
+    }
 }

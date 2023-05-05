@@ -81,7 +81,7 @@ public class PracticeController {
 
     @PostMapping("/practices/{id}/vote")
     public ResponseEntity<String> vote(@PathVariable("id") Long id, @RequestParam("vote") int vote,
-                               HttpServletRequest request, HttpServletResponse response) {
+                                       HttpServletRequest request, HttpServletResponse response) {
         // проверяем, голосовал ли пользователь за эту практику
         Cookie[] cookies = request.getCookies();
         String votedPracticeIds = null;

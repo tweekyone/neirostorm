@@ -6,6 +6,25 @@
     <meta charset="UTF-8"/>
     <title>Добавить практику</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <!-- Подключаем файлы CKEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.css">
+    <link rel="stylesheet" href="/css/add-practice.css">
+    <script>
+        // Инициализируем CKEditor после загрузки страницы
+        window.addEventListener('load', function () {
+            ClassicEditor
+                .create(document.querySelector('#example'))
+                .then(editor => {
+                    editor.model.document.on('change:data', () => {
+                        document.querySelector('#example').value = editor.getData();
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
@@ -13,7 +32,7 @@
 
 <div class="container mt-5">
     <h2 class="mb-4">Изменение практики</h2>
-    <form th:action="@{/practice/${id}/update}" th:object="${practice}" method="put">
+    <form th:action="@{/practice/{id}/update(id=${id})}" th:object="${practice}" method="post">
         <div class="mb-3">
             <label for="ownerName" class="form-label">Автор практики:</label>
             <input type="text" class="form-control" id="ownerName" name="ownerName" th:field="*{ownerName}" required>
@@ -32,7 +51,9 @@
         </div>
         <div class="mb-3">
             <label for="example" class="form-label">Пример:</label>
-            <textarea class="form-control" id="example" name="example" th:field="*{example}" required></textarea>
+            <div class="editor">
+                <textarea id="example" name="example" style="display:none;" th:field="*{example}" required></textarea>
+            </div>
         </div>
         <div class="mb-3">
             <label for="conclusion" class="form-label">Вывод:</label>

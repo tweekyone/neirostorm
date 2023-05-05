@@ -90,7 +90,8 @@ public class PracticeController {
     }
 
     @PostMapping("/insert")
-    public String addPractice(@ModelAttribute("practice") @Valid PracticeDto practiceDto, Model model) {
+    public String addPractice(@ModelAttribute("practice") @Valid PracticeDto practiceDto,
+                              Model model) {
         Practice practice = practiceService.addPractice(practiceDto);
 
         model.addAttribute("practice", practice);
@@ -174,10 +175,11 @@ public class PracticeController {
 
         model.addAttribute("practice", practiceDto);
         model.addAttribute("id", practice.getId());
+        model.addAttribute("topics", Topic.values());
         return "update-practice";
     }
 
-    @PutMapping("/practice/{id}/update")
+    @PostMapping("/practice/{id}/update")
     public String updatePractice(@PathVariable("id") Long id,
                                  @ModelAttribute("practice") @Valid PracticeDto practiceDto,
                                  Model model) {

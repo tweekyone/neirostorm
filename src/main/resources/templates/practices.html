@@ -72,7 +72,7 @@
                             <!-- Добавляем описание практики -->
                             <p class="card-text" th:text="${practice.description}"></p>
 
-                            <span class="badge rounded-pill bg-primary mt-auto" th:text="${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName}"></span>
+                            <span class="badge rounded-pill bg-primary mt-auto" th:if="${practice.topic !=null && !practice.topic.isBlank()}" th:text="${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName}"></span>
 
                             <a th:href="@{/practice/{id}(id=${practice.id})}" class="stretched-link"></a>
                         </div>

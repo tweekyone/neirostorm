@@ -42,7 +42,7 @@
                  class="img-fluid rounded" alt="Practice preview image"/>
 
             <div class="mt-3">
-                <h3 th:text="${practice.topic != null} ? ${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName} : ''"></h3>
+                <h3 th:text="${practice.topic != null && !practice.topic.isBlank()} ? ${T(ru.iac.hakaton.neirostorm.model.Topic).fromName(practice.topic).displayName} : ''"></h3>
                 <h4>Автор: <span
                         th:text="${practice.getOwnerName != null} ? ${practice.getOwnerName} : ''"></span>
                 </h4>

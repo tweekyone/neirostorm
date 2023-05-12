@@ -17,11 +17,37 @@
 <div class="container">
 
 
-        <h1 class="mt-5">Рейтинг практик</h1>
+    <h1 class="mt-5 mb-3">Рейтинг практик</h1>
+
+    <form id="search-form" th:action="@{/practices-rating}" method="get">
+        <div class="row">
+            <div class="col-md-3 col-12 mb-2">
+                <select id="search-select" class="form-select" name="topic" th:value="${selectedTopic}" onchange="this.form.submit()">
+                    <option value="" th:selected="${selectedTopic == null}">Все темы</option>
+                    <option value="Разработка" th:selected="${selectedTopic == 'Разработка'}">Разработка
+                    </option>
+                    <option value="Анализ" th:selected="${selectedTopic == 'Анализ'}">Анализ</option>
+                    <option value="Тестирование" th:selected="${selectedTopic == 'Тестирование'}">
+                        Тестирование
+                    </option>
+                    <option value="Документирование" th:selected="${selectedTopic == 'Документирование'}">
+                        Документирование
+                    </option>
+                    <option value="DevOps" th:selected="${selectedTopic == 'DevOps'}">DevOps</option>
+                </select>
+            </div>
+            <script>
+                document.getElementById("search-select").addEventListener("change", function() {
+                    document.getElementById("search-form").submit();
+                });
+            </script>
+        </div>
+    </form>
+
         <table class="table mt-3">
             <thead>
             <tr>
-                <th scope="col">Лого</th>
+                <th scope="col"></th>
                 <th scope="col">Рейтинг</th>
                 <th scope="col">Название практики</th>
                 <th scope="col">Автор</th>
@@ -32,11 +58,13 @@
             <tr th:each="practice : ${practices}">
                 <td><img  th:src="${practice.previewImage != null} ? ${practice.previewImage} : '/img/practice-default-logo.png'"
                           style="max-height: 100px; max-width: 100px; object-fit: contain;" alt="Preview Image"></td>
-                <td th:text="${practice.totalRating}"></td>
+                <td th:text="${practice.totalRating + '%'}"></td>
                 <td><a th:href="@{/practice/{id}(id=${practice.id})}">
                     <span th:text="${practice.title}"></span>
                 </a></td>
-                <td th:text="${practice.ownerName}"></td>
+
+                <td th:text="${practice.ownerName != null} ? ${practice.ownerName} : 'Anonymous'"
+                    th:class="${practice.ownerName != null} ? '' : 'text-muted'"></td>
                 <td th:text="${practice.description}"></td>
 <!--                <td th:text="${practice.rating}"></td>-->
             </tr>

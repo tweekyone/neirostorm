@@ -53,13 +53,16 @@ public class Practice {
     @Column(name = "views", nullable = false)
     private int views;
 
-    public float getTotalRating() {
+    public int getTotalRating() {
         int likes = (int) votes.stream().filter(vote -> vote.getVoteValue() == 1).count();
         int dislikes = (int) votes.stream().filter(vote -> vote.getVoteValue() == -1).count();
 
-       return (likes - dislikes);
+        if( likes + dislikes == 0) {
+            return 0;
+        } else {
+            return (int) (100 * (likes - dislikes)/ (likes + dislikes) + 100) / 2;
+        }
     }
-
 
     @OneToMany(mappedBy = "practice")
     private List<Vote> votes;

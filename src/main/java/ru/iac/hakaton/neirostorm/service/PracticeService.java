@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import ru.iac.hakaton.neirostorm.dto.PracticeDto;
 import ru.iac.hakaton.neirostorm.model.Practice;
 import ru.iac.hakaton.neirostorm.repository.PracticeRepository;
+import ru.iac.hakaton.neirostorm.util.GoogleImageSearch;
 import ru.iac.hakaton.neirostorm.util.PracticeSpecifications;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -40,7 +42,8 @@ public class PracticeService {
         return practiceOpt.get();
     }
 
-    public Practice addPractice(PracticeDto practiceDto) {
+    public Practice addPractice(PracticeDto practiceDto)  {
+
         Practice practice = Practice.builder()
                 .ownerName(practiceDto.getOwnerName())
                 .topic(practiceDto.getTopic().name())
@@ -49,7 +52,7 @@ public class PracticeService {
                 .steps(practiceDto.getSteps())
                 .example(practiceDto.getExample())
                 .conclusion(practiceDto.getConclusion())
-                .previewImage(practiceDto.getPreviewImage() == "" ? null : practiceDto.getPreviewImage())
+                .previewImage(practiceDto.getPreviewImage() == "" ? GoogleImageSearch.getImageURLByQuery(practiceDto.getTitle()) : practiceDto.getPreviewImage())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();

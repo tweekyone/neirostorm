@@ -62,10 +62,9 @@
                 <td><a th:href="@{/practice/{id}(id=${practice.id})}">
                     <span th:text="${practice.title}"></span>
                 </a></td>
-
+                <td th:text="${practice.description}"></td>
                 <td th:text="${practice.ownerName != null} ? ${practice.ownerName} : 'Anonymous'"
                     th:class="${practice.ownerName != null} ? '' : 'text-muted'"></td>
-                <td th:text="${practice.description}"></td>
 <!--                <td th:text="${practice.rating}"></td>-->
             </tr>
             </tbody>
